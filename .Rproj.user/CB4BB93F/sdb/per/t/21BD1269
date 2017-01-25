@@ -1,0 +1,17 @@
+{
+    "contents" : "require(gdata)\nbk <- read.xls(\"C:/Users/Abhijeet/Desktop/DIC/Dataset/doing_data_science-master/dds_datasets/dds_datasets/rollingsales_brooklyn.xls\",pattern=\"BOROUGH\", verbose = FALSE, perl = \"C:/Strawberry/perl/bin/perl.exe\")\nhead(bk)\nsummary(bk)\nbk$SALE.PRICE.N <- as.numeric(gsub(\"[^[:digit:]]\",\"\",\n                                   bk$SALE.PRICE))\ncount(is.na(bk$SALE.PRICE.N))\nnames(bk) <- tolower(names(bk))\n\n## clean/format the data with regular expressions\nbk$gross.sqft <- as.numeric(gsub(\"[^[:digit:]]\",\"\",\n                                 bk$gross.square.feet))\nbk$land.sqft <- as.numeric(gsub(\"[^[:digit:]]\",\"\",\n                                bk$land.square.feet))\nbk$sale.date <- as.Date(bk$sale.date)\nbk$year.built <- as.numeric(as.character(bk$year.built))\n## do a bit of exploration to make sure there's not anything\n## weird going on with sale prices\nattach(bk)\nhist(sale.price.n)\nhist(sale.price.n[sale.price.n>0])\nhist(gross.sqft[sale.price.n==0])\ndetach(bk)\n## keep only the actual sales\nbk.sale <- bk[bk$sale.price.n!=0,]\nplot(bk.sale$gross.sqft,bk.sale$sale.price.n)\nplot(log(bk.sale$gross.sqft),log(bk.sale$sale.price.n))\n\n## for now, let's look at 1-, 2-, and 3-family homes\nbk.homes <- bk.sale[which(grepl(\"FAMILY\", bk.sale$building.class.category)),]\nplot(log(bk.homes$gross.sqft),log(bk.homes$sale.price.n))\nbk.homes[which(bk.homes$sale.price.n<100000),]\norder(bk.homes[which(bk.homes$sale.price.n<100000),]$sale.price.n)\n## remove outliers that seem like they weren't actual sales\nbk.homes$outliers <- (log(bk.homes$sale.price.n) <=5) + 0\nbk.homes <- bk.homes[which(bk.homes$outliers==0),]\nplot(log(bk.homes$gross.sqft),log(bk.homes$sale.price.n))\n\n",
+    "created" : 1457153841243.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1095474860",
+    "id" : "21BD1269",
+    "lastKnownWriteTime" : 1456336302,
+    "path" : "C:/Users/Abhijeet/Desktop/DIC/Code/RealDirect/BrooklynEDA.R",
+    "project_path" : "BrooklynEDA.R",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,17 @@
+{
+    "contents" : "library(twitteR)\nlibrary(RCurl)\nlibrary(stringr)\nlibrary(jsonlite)\n\n# Declare Twitter API Credentials\napi_key <- \"a5Zo2dQQsGFlkqooxbnJkYvGS\" \napi_secret <- \"LuAtcckSOjzyanjAiujKF8asZuAvPydscSdzJeMpnUANOgB9Z2\"\ntoken <- \"35434673-UHAn0yG1awxHlomxlE0AqrUPQrnOegydmEYRDkHfv\" \ntoken_secret <- \"ZKodOdUaNLyjvIfyZnm73n2nY3pGTgh2G4oJiaVNJ35cU\"\n\n# Create Twitter Connection\nsetup_twitter_oauth(api_key, api_secret, token, token_secret)\n\n# Run Twitter Search. Format is searchTwitter(\"Search Terms\", n=100, lang=\"en\", geocode=\"lat,lng\", also accepts since and until).\ntweets <- searchTwitter(\"#MWC16\", n=1000, lang=\"en\", since=\"2016-02-21\")\n\ntweets.df <- twListToDF(tweets)\n\n\n\nx <- iconv(toJSON(tweets.df), to = \"UTF8\")\nfileConn<-file(\"MWC_10.json\")\nwriteLines(c(x), fileConn)\nclose(fileConn)\n\n          ",
+    "created" : 1457137696255.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1459149135",
+    "id" : "BDBE7E9F",
+    "lastKnownWriteTime" : 1456977869,
+    "path" : "C:/Users/Abhijeet/Desktop/DIC/Code/TwitterCrawler/Crawler.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

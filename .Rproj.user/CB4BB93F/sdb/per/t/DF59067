@@ -1,0 +1,17 @@
+{
+    "contents" : "library(jsonlite)\n\nurlpart1=\"MWC_\"\nurlpart2=\".json\"\ntweetData=fromJSON('MWC_1.json', flatten=TRUE)\nfor(i in 2:10){\n  wholeurl=paste(paste(urlpart1,i,sep=\"\"),urlpart2,sep=\"\") #construct the url for different days urlpart1+i+urlpart2\n  subdataframe=fromJSON(wholeurl, flatten = TRUE)\n  tweetData$latitude <- NULL\n  tweetData$longitude <- NULL\n  subdataframe$latitude <- NULL\n  subdataframe$longitude <- NULL\n  tweetData=rbind(tweetData,subdataframe) \n}\n\n\ns7DataFrame <- data.frame(\"Samsung\", nrow(data.frame(grep('samsunggalaxys7', tweetData$text))))\nsamsungDataFrame <- data.frame(\"Samsung\", nrow(data.frame(grep('samsung', tweetData$text))))\ncolnames(s7DataFrame) <- c(\"Company\",\"Count\")\ncolnames(samsungDataFrame) <- c(\"Company\",\"Count\")\ng5DataFrame <- data.frame(\"LG\",nrow(data.frame(grep('LGG5', tweetData$text))))\nlgDataFrame <- data.frame(\"LG\",nrow(data.frame(grep('LG', tweetData$text))))\ncolnames(g5DataFrame) <- c(\"Company\",\"Count\")\ncolnames(lgDataFrame) <- c(\"Company\",\"Count\")\n\ntotalSamsungDF = rbind(samsungDataFrame, s7DataFrame)\ntotalLGDF = rbind(g5DataFrame, lgDataFrame)\ntotal <- rbind(totalSamsungDF, totalLGDF)\n\n\n\n",
+    "created" : 1457137700870.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3137368411",
+    "id" : "DF59067",
+    "lastKnownWriteTime" : 1457227833,
+    "path" : "C:/Users/Abhijeet/Desktop/DIC/Code/TwitterCrawler/JSONReader.r",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

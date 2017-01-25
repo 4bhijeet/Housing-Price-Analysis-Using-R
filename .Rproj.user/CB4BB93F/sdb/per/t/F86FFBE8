@@ -1,0 +1,17 @@
+{
+    "contents" : "data1 <- read.csv(url(\"http://stat.columbia.edu/~rachel/datasets/nyt1.csv\"))\nhead(data1)\ndata1$agecat <-cut(data1$Age,c(-Inf,0,18,24,34,44,54,64,Inf))\n\nsummary(data1)\n\ninstall.packages(\"doBy\")\nlibrary(\"doBy\")\nsiterange <- function(x){c(length(x), min(x), mean(x), max(x))}\nsummaryBy(Age~agecat, data =data1, FUN=siterange)\n\nsummaryBy(Gender+Signed_In+Impressions+Clicks~agecat,\n          data =data1)\n\ninstall.packages(\"ggplot2\")\nlibrary(ggplot2)\nggplot(data1, aes(x=Impressions, fill=agecat)) + geom_histogram(binwidth=1)\nggplot(data1, aes(x=agecat, y=Impressions, fill=agecat)) + geom_boxplot()\n\ndata1$hasimps <-cut(data1$Impressions,c(-Inf,0,Inf))\nsummaryBy(Clicks~hasimps, data =data1, FUN=siterange)\nggplot(subset(data1, Impressions>0), aes(x=Clicks/Impressions,\n                                         colour=agecat)) + geom_density()\nggplot(subset(data1, Clicks>0), aes(x=Clicks/Impressions,\n                                    colour=agecat)) + geom_density()\nggplot(subset(data1, Clicks>0), aes(x=agecat, y=Clicks, fill=agecat)) + geom_boxplot()\nggplot(subset(data1, Clicks>0), aes(x=Clicks, colour=agecat)) + geom_density()\n\n# create categories\ndata1$scode[data1$Impressions==0] <- \"NoImps\"\ndata1$scode[data1$Impressions >0] <- \"Imps\"\ndata1$scode[data1$Clicks >0] <- \"Clicks\"\n\ndata1$scode <- factor(data1$scode)\nhead(data1)\n\nclen <- function(x){c(length(x))}\netable<-summaryBy(Impressions~scode+Gender+agecat,\n                  data = data1, FUN=clen)",
+    "created" : 1457144044235.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "855975707",
+    "id" : "F86FFBE8",
+    "lastKnownWriteTime" : 1456168771,
+    "path" : "C:/Users/Abhijeet/Desktop/DIC/Code/SimpleEDA/SimpleEDA1.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

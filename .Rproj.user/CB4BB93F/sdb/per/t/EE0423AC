@@ -1,0 +1,17 @@
+{
+    "contents" : "shinyUI(fluidPage(\n  \n  titlePanel(\"Sentiment Analysis for Mobile World Congress 2016\"),\n  h4(\"Tweets:\"),\n  \n   # Show a plot of the generated distribution\n    mainPanel(\n      plotOutput(\"distPlot\"),\n      sidebarPanel(\n        plotOutput(\"positive_wordcloud\")\n      ),\n      sidebarPanel(\n        plotOutput(\"negative_wordcloud\")\n      ),\n      sidebarPanel(\n        plotOutput(\"neutral_wordcloud\")\n      )\n    )\n    \n  \n))",
+    "created" : 1457227816640.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3796928081",
+    "id" : "EE0423AC",
+    "lastKnownWriteTime" : 1457056516,
+    "path" : "C:/Users/Abhijeet/Desktop/DIC/Code/Sentiment Analysis/ui.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
